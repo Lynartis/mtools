@@ -70,6 +70,14 @@ class VIEW3D_PT_mtools_export_anim(bpy.types.Panel):
         col.prop(scene, "mtools_anim_mode", expand=True)
 
         col.separator()
+        col.prop(scene, "mtools_anim_coord", expand=True)
+        if scene.mtools_anim_coord == 'CUSTOM':
+            col.prop(scene, "mtools_anim_coord_remap", text="")
+
+        col.separator()
+        col.prop(scene, "mtools_anim_rotation", expand=True)
+
+        col.separator()
         row = col.row(align=True)
         row.prop(scene, "mtools_anim_export_path", text="")
         row.operator("mtools.set_anim_export_path", text="", icon='FILEBROWSER')
