@@ -26,26 +26,25 @@ KEYMAP_ENTRIES = [
         "km_name": "Mesh",
         "space_type": "EMPTY",
     },
-    # Add new tools here, for example:
-    # {
-    #     "idname": "mtools.loop_cutter",
-    #     "label": "Smart Loop Cut",
-    #     "category": "Mesh",
-    #     "key": "L",
-    #     "shift": True,
-    #     "ctrl": True,
-    #     "km_name": "Mesh",
-    #     "space_type": "EMPTY",
-    # },
-    # {
-    #     "idname": "mtools.uv_straighten",
-    #     "label": "Straighten UVs",
-    #     "category": "UV",
-    #     "key": "S",
-    #     "shift": True,
-    #     "km_name": "UV Editor",
-    #     "space_type": "EMPTY",
-    # },
+    # ── Boundary Selection ──
+    {
+        "idname": "mtools.select_boundary_vertices",
+        "label": "Select Boundary Vertices",
+        "category": "Mesh",
+        "key": "ONE",
+        "ctrl": True,
+        "km_name": "Mesh",
+        "space_type": "EMPTY",
+    },
+    {
+        "idname": "mtools.select_boundary_edges",
+        "label": "Select Boundary Edges",
+        "category": "Mesh",
+        "key": "TWO",
+        "ctrl": True,
+        "km_name": "Mesh",
+        "space_type": "EMPTY",
+    },
 ]
 
 
