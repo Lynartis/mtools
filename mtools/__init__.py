@@ -30,6 +30,7 @@ def register():
         bpy.utils.register_class(cls)
     ops.export_fbx.register_props()
     ops.export_anim.register_props()
+    ops.export_anim_xml.register_props()
     for cls in ui.classes:
         bpy.utils.register_class(cls)
     bpy.utils.register_class(preferences.MToolsPreferences)
@@ -41,6 +42,7 @@ def unregister():
     bpy.utils.unregister_class(preferences.MToolsPreferences)
     for cls in reversed(ui.classes):
         bpy.utils.unregister_class(cls)
+    ops.export_anim_xml.unregister_props()
     ops.export_anim.unregister_props()
     ops.export_fbx.unregister_props()
     for cls in reversed(ops.classes):

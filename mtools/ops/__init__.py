@@ -5,8 +5,11 @@ if "bpy" in locals():
     boundary_select = importlib.reload(boundary_select)
     export_fbx = importlib.reload(export_fbx)
     export_anim = importlib.reload(export_anim)
+    # export_anim_xml imports export_anim, so reload it AFTER its dependency.
+    export_anim_xml = importlib.reload(export_anim_xml)
 else:
-    from . import reload_scripts, target_weld, boundary_select, export_fbx, export_anim
+    from . import (reload_scripts, target_weld, boundary_select, export_fbx,
+                   export_anim, export_anim_xml)
 
 
 def _collect_classes():
@@ -16,6 +19,7 @@ def _collect_classes():
         *boundary_select.classes,
         *export_fbx.classes,
         *export_anim.classes,
+        *export_anim_xml.classes,
     ]
 
 
@@ -24,11 +28,13 @@ classes = _collect_classes()
 
 def reload():
     """Called by the parent package to refresh the classes list after reload."""
-    global classes, reload_scripts, target_weld, boundary_select, export_fbx, export_anim
+    global classes, reload_scripts, target_weld, boundary_select, export_fbx, \
+        export_anim, export_anim_xml
     import importlib
     reload_scripts = importlib.reload(reload_scripts)
     target_weld = importlib.reload(target_weld)
     boundary_select = importlib.reload(boundary_select)
     export_fbx = importlib.reload(export_fbx)
     export_anim = importlib.reload(export_anim)
+    export_anim_xml = importlib.reload(export_anim_xml)  # after export_anim
     classes = _collect_classes()
