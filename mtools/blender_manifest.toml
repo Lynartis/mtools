@@ -1,0 +1,28 @@
+schema_version = "1.0.0"
+
+# Unique identifier; also the Python module name the add-on is loaded under.
+id = "mtools"
+version = "0.1.0"
+name = "MTools"
+tagline = "Collection of mesh and export tools"
+maintainer = "Marc <marc.peregrina@gmail.com>"
+
+# "add-on" (Python) or "theme".
+type = "add-on"
+
+# Optional grouping tags shown in the extensions browser.
+# Must come from Blender's add-on tag vocabulary.
+tags = ["Mesh", "Import-Export"]
+
+# Extensions require Blender 4.2 or newer.
+blender_version_min = "4.2.0"
+
+# SPDX license identifier(s) — https://spdx.org/licenses/
+license = ["SPDX:GPL-3.0-or-later"]
+
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  "/.git/",
+  "/*.zip",
+]

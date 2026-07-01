@@ -3,7 +3,7 @@ from . import keymaps
 
 
 class MToolsPreferences(bpy.types.AddonPreferences):
-    bl_idname = __package__  # "mtools"
+    bl_idname = __package__  # e.g. "bl_ext.user_default.mtools" under the extensions system
 
     def draw(self, context):
         layout = self.layout
