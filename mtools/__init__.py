@@ -1,49 +1,42 @@
-bl_info = {
-    "name": "MTools",
-    "author": "Marc",
-    "version": (0, 1, 0),
-    "blender": (3, 6, 0),
-    "location": "View3D > Sidebar > MTools",
-    "description": "Collection of mesh tools for Blender (Target Weld, and more)",
-    "category": "Mesh",
-}
+"""
+MTools - a Blender 4.2+ extension that exports a rig + model as FBX and bone
+animation as a custom .anim XML file for a custom game engine.
 
-# Hot-reload support: reload submodules bottom-up (utils first, then ops, etc.)
+Package layout:
+    core/   - pure logic (coordinates, curve reading, XML, FBX export)
+    ops/    - operators + all Scene properties
+    ui.py   - the sidebar panels
+
+Reload Scripts (bpy.ops.script.reload) re-runs this file. The
+`if "bpy" in locals()` guard below hot-reloads the submodules bottom-up so
+code edits show up without restarting Blender.
+"""
+
 if "bpy" in locals():
     import importlib
-    from .utils import mesh as _mesh
-    importlib.reload(_mesh)
-    utils = importlib.reload(utils)
-    ops = importlib.reload(ops)
-    ops.reload()  # refresh classes list after submodule reload
-    keymaps = importlib.reload(keymaps)
-    preferences = importlib.reload(preferences)
-    ui = importlib.reload(ui)
+    core = importlib.reload(core)         # reload logic first...
+    ops = importlib.reload(ops)           # ...then operators (they import core)
+    ops.reload()                          # rebuild the operator class list
+    ui = importlib.reload(ui)             # ...then the panels
 else:
-    from . import utils, ops, keymaps, preferences, ui
+    from . import core, ops, ui
 
 import bpy
 
 
 def register():
+    # 1) operators, 2) their Scene properties, 3) the UI panels.
     for cls in ops.classes:
         bpy.utils.register_class(cls)
-    ops.export_fbx.register_props()
-    ops.export_anim.register_props()
-    ops.export_anim_xml.register_props()
+    ops.register_props()
     for cls in ui.classes:
         bpy.utils.register_class(cls)
-    bpy.utils.register_class(preferences.MToolsPreferences)
-    keymaps.register()
 
 
 def unregister():
-    keymaps.unregister()
-    bpy.utils.unregister_class(preferences.MToolsPreferences)
+    # Exact reverse of register().
     for cls in reversed(ui.classes):
         bpy.utils.unregister_class(cls)
-    ops.export_anim_xml.unregister_props()
-    ops.export_anim.unregister_props()
-    ops.export_fbx.unregister_props()
+    ops.unregister_props()
     for cls in reversed(ops.classes):
         bpy.utils.unregister_class(cls)

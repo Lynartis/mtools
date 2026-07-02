@@ -5,7 +5,7 @@ id = "mtools"
 version = "0.1.0"
 name = "MTools"
 tagline = "Collection of mesh and export tools"
-maintainer = "Marc <marc.peregrina@gmail.com>"
+maintainer = "Marc"
 
 # "add-on" (Python) or "theme".
 type = "add-on"
